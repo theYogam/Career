@@ -1,0 +1,38 @@
+{% extends 'careers/offer_submission.html' %}
+{% load i18n humanize static auth_tokens  %}
+
+{% block page_title %}
+    <title>{% blocktrans with offer_name=offer.name company_name=config.company_name %}
+        {{ offer_name }} - Careers at {{ company_name }} {% endblocktrans %}</title>
+{% endblock %}
+
+{% block head_style %}
+    {{ block.super }}
+    <link href="{% static 'ikwen/css/uploader-single.css' %}?v=20.8.17" media="screen" rel="stylesheet" type="text/css" />
+    <style>
+        {#body {background-color: #fff}#}
+        body section:first-of-type:not(.photos) {padding-top: 15vh; padding-bottom: 9vh}
+        section.thanks {min-height: 400px}
+        section.thanks .visit {width: auto; height: 50px; line-height: 35px; display: block; margin-top: 40px}
+        section.thanks .apply i {font-size: 18px}
+        section.thanks .detail {margin-top: 50px}
+        section.thanks form h4 {margin: 40px auto; font-weight: 700}
+        footer {margin: 0}
+        {#.apply:hover, .apply:active, .apply:focus {background-color: #f28d40; border}#}
+    </style>
+{% endblock %}
+
+{% block submission %}
+    <section class="thanks">
+        <div class="container">
+            <div class="col-sm-6" style="margin: auto; float:none;">
+                <h3 style="color: #f28d40">{% trans 'Application submitted !' %}</h3>
+                <p>{% trans 'Thanks for submitting your application, you will get notified on your email when the results come out.' %}</p>
+                <div class="col-sm-6" style="margin: auto; float:none;">
+                    <a href="https://ikwen.com" class="btn btn-sm btn-deep-blue visit" >{% trans 'Visit our services' %}</a>
+                </div>
+            </div>
+        </div>
+
+    </section>
+{% endblock %}

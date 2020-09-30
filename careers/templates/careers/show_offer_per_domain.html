@@ -1,0 +1,57 @@
+{% extends 'careers/home.html' %}
+
+{% load i18n humanize static auth_tokens  %}
+
+{% block head_style %}
+    {{ block.super }}
+    <style>
+        #banner-top h1 {font-family: 'Circular',Helvetica,sans-serif; font-size: 6.25em}
+        .title {font-weight: 900; color: #191414}
+        .title-3 {margin: 100px auto; font-size: 40px;}
+        .short-description img:nth-child(1) {max-width: 70%; margin: 0 0 0 auto; height: 350px}
+        .short-description img:nth-child(2) {max-width: 50%; margin: -35% 0 0 15%; height: 250px}
+
+        @media (max-width: 767px) {
+            #banner-top h1 {font-size: 3em}
+            .title-3 {margin: 50px auto; font-size: 40px;}
+            .short-description img:nth-child(1) {height: 200px}
+            .short-description img:nth-child(2) {height: 150px}
+        }
+    </style>
+{% endblock %}
+
+{% block page_title %}
+    <title>{% blocktrans with domain_name=domain.name company_name=config.company_name %}
+        {{ domain_name }} - Careers at {{ company_name }}{% endblocktrans %} </title>
+{% endblock %}
+
+{% block banner %}
+    <section>
+         <div id="banner-top">
+            <div class="section-banner-top" style="background-image: url({% get_media_prefix %}{{ domain.cover_image }});">
+                <div class="section-banner-inner">
+                    <div class="col-md-6 col-sm-6 col-md-offset-3 col-sm-offset-3 text-center">
+                        <h1>{{ domain.name }}</h1>
+                        <p>{% blocktrans with offer_count=offer_list|length %} {{ offer_count }} offers in {{ location_count }} locations{% endblocktrans %}</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="clearfix"></div>
+    </section>
+{% endblock %}
+{% block customize_body %}
+    <div class="short-description">
+        <div class="col-sm-6">
+            <h3 class="title">{{ domain.target }}</h3>
+            <p>{{ domain.short_description }}</p>
+        </div>
+        <div class="col-sm-6">
+            <img class="img-responsive img-circle" src="{% get_media_prefix %}{{ domain.cover_image }}">
+            <img class="img-responsive img-circle" src="{% get_media_prefix %}{{ domain.cover_image }}">
+        </div>
+        <div class="clearfix"></div>
+    </div>
+    <h2 class="text-center title title-3">{% blocktrans with domain_name=domain.name %}Available offers in {{ domain_name }}{% endblocktrans %}</h2>
+    <div class="clearfix"></div>
+{% endblock %}

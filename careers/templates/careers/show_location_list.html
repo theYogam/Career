@@ -1,0 +1,32 @@
+{% extends 'careers/home.html' %}
+
+{% load i18n humanize static auth_tokens %}
+{% block page_title %}
+    <title>Locations - Careers at {{ config.company_name }} </title>
+{% endblock %}
+
+{% block head_style %}
+    {{ block.super }}
+    <style>
+        #navbar {background-color: transparent}
+        #navbar-search {display: none}
+    </style>
+{% endblock %}
+
+
+{% block page_content %}
+    <section class="location-list">
+        {% for location in location_list %}
+            <a class="col-sm-3 {% if forloop.counter0 < 4 %}table-bordered{% endif %} text-center location {% if forloop.counter0 < 4 %}banner{% endif %}"
+               href="{% url 'careers:show_offer_per_location' location.slug %}" {% if forloop.counter0 < 4 %} style="background-image: url({% get_media_prefix %}{{ location.cover_image }});"{% endif %}>
+                <div class="{% if forloop.counter0 < 4 %}location-inner{% endif %}">
+                    <div class="image" style="background-image: url({% get_media_prefix %}{{ location.cover_image }});"></div>
+                    <h2>{{ location }}</h2>
+                    <p>{{ location.offer_count }} {% trans 'offers' %}</p>
+                </div>
+            </a>
+            {% if forloop.counter|divisibleby:4 %}<div class="clearfix"></div><div style="margin-top: 20px"></div>{% endif %}
+        {% endfor %}
+        <div class="clearfix"></div>
+    </section>
+{% endblock %}

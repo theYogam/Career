@@ -1,0 +1,20 @@
+{% extends 'careers/home.html' %}
+{% load i18n humanize static auth_tokens  %}
+
+{% block page_title %}
+    <title>{% blocktrans with company_name=config.company_name %}
+        Job domains - Careers at {{ company_name }} {% endblocktrans %}</title>
+{% endblock %}
+
+{% block page_content %}
+    <section>
+        <h1 class="text-center" style="font-weight: 900; font-size: 70px">{% trans 'Our Job Domains' %}</h1>
+        {% for domain in domain_list %}
+            <a class="col-sm-4 text-center" href="{% url 'careers:show_offer_per_location' domain.slug %}" style="display: block">
+                <div class="image" style="background-image: url({% get_media_prefix %}{{ domain.cover_image }}); background-size: cover; background-position: center center; height: 200px; width: 200px; border-radius: 50%"></div>
+                <h2>{{ domain }}</h2>
+                <p style="font-size: 18px">{{ domain.offer_count }} {% trans 'offers' %}</p>
+            </a>
+        {% endfor %}
+    </section>
+{% endblock %}

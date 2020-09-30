@@ -1,0 +1,129 @@
+{% extends 'website/base.html' %}
+{% load i18n humanize static auth_tokens  %}
+
+{% block page_title %}
+    <title>{% blocktrans with offer_name=offer.name company_name=config.company_name %}
+        {{ offer_name }} - Careers at {{ company_name }} {% endblocktrans %}</title>
+{% endblock %}
+
+{% block head_style %}
+    {{ block.super }}
+    <link href="{% static 'ikwen/css/uploader-single.css' %}?v=20.8.17" media="screen" rel="stylesheet" type="text/css" />
+    <style>
+        body section:first-of-type:not(.photos) {padding-top: 15vh; padding-bottom: 9vh}
+        section .apply {width: auto; height: 50px; line-height: 35px; display: block; margin-top: 40px}
+        section .apply i {font-size: 18px}
+        section .detail {margin-top: 50px}
+        section form h4 {margin: 40px auto; font-weight: 700}
+    </style>
+{% endblock %}
+
+{% block head_js %}
+    <script src="{% static 'ikwen/js/jquery-1.12.4.min.js' %}"></script>
+    <script src="{% static 'ikwen/ajaxuploader/js/fileuploader.js' %}"></script>
+{% endblock %}
+
+{%  block page_content %}
+    {% block head %}
+        <section style="background: #fff" >
+            <div class="container">
+                <div class="col-sm-6" style="margin: auto; float: none">
+                    <h2>{{ offer.name }}</h2>
+                    <h4 class="text-muted">{{ offer.location }} / {{ offer.domain }}</h4>
+                </div>
+            </div>
+        </section>
+    {% endblock %}
+    {% block submission %}
+        <section style="background: #f9f9f9">
+            {% if errors %}<p class="alert alert-danger">{{ errors }}</p>{% endif %}
+            <div class="container">
+                <div class="col-sm-6" style="margin: auto; float: none">
+                    <form method="post">{% csrf_token %}
+                        <h4>{% trans 'SUBMIT YOUR APPLICATION' %}</h4>
+                        <input type="hidden" name="member" value="{{ user.id }}">
+                        <input type="hidden" name="offer" value="{{ offer.id }}">
+                        <input type="hidden" name="label_field" value="name">
+                        <input type="hidden" name="slug_field" value="slug">
+                        {% for media_obj in media_field_list %}
+                            <div class="form-group" style="padding-left: 0; margin-right: 15px">
+                                <div>
+                                {% with media=media_obj %}
+                                    {% include 'core/snippets/media_uploader_single.html' %}
+                                {% endwith %}
+                                </div>
+                            </div>
+                            <p class="help clear">
+                                {% if media.media.name and not media.media.field.read_only %}
+                                <i class="glyphicon glyphicon-trash delete-media delete-media{{ media.counter }}" title="{% trans "Delete media" %}"></i>
+                                <span>{{ media.media.field.help_text|safe }}</span>
+                                {% else %}
+                                <span>{{ media.media.field.help_text|safe }}</span>
+                                {% endif %}
+                            </p>
+                        {% endfor %}
+                        <div class="form-group">
+                            <label for="id_current-company">{% trans 'Current company' %}</label>
+                            <input type="text" id="id_current_company" name="current_company" class="form-control input-sm">
+                        </div>
+                        <div class="form-group">
+                            <label for="id_location">{% trans 'Location' %}</label>
+                            <select class="form-control" name="location" id="id_location">
+                                {% for location in location_list %}
+                                    <option value="{{ location.id }}">{{ location }}</option>
+                                {% endfor %}
+                            </select>
+                        </div>
+                        <h4>{% trans 'Professional Links' %}</h4>
+                        <div class="form-group">
+                            <label for="id_linkedin_url">{% trans 'LinkedIn URL' %}</label>
+                            <input type="url" id="id_linkedin_url" name="linkedin_url" class="form-control input-sm">
+                        </div>
+                        <div class="form-group">
+                            <label for="id_github_url">{% trans 'Github URL' %}</label>
+                            <input type="url" id="id_github_url" name="github_url" class="form-control input-sm">
+                        </div>
+                        <div class="form-group">
+                            <label for="id_portfolio_url">{% trans 'Portfolio URL' %}</label>
+                            <input type="url" id="id_portfolio_url" name="portfolio_url" class="form-control input-sm">
+                        </div>
+                        <div class="form-group">
+                            <label for="id_other-website">{% trans 'Other Website' %}</label>
+                            <input type="text" id="id_other_website" name="other_website" class="form-control input-sm">
+                        </div>
+                        <h4>{% trans 'Social Links' %}</h4>
+                        <div class="form-group">
+                            <label for="id_facebook_url">{% trans 'Facebook URL' %}</label>
+                            <input type="url" id="id_facebook_url" name="facebook_url" class="form-control input-sm">
+                        </div>
+                        <div class="form-group">
+                            <label for="id_twitter_url">{% trans 'Twitter URL' %}</label>
+                            <input type="url" id="id_twitter_url" name="twitter_url" class="form-control input-sm">
+                        </div>
+                        <div class="form-group">
+                            <label for="id_instagram_url">{% trans 'Instagram URL' %}</label>
+                            <input type="url" id="id_instagram_url" name="instagram_url" class="form-control input-sm">
+                        </div>
+                        <div class="form-group">
+                            <label for="id_youtube_url">{% trans 'YouTube URL' %}</label>
+                            <input type="url" id="id_youtube_url" name="youtube_url" class="form-control input-sm">
+                        </div>
+                        <h4>{% trans 'ADDITIONAL INFORMATION' %}</h4>
+                        <textarea class="form-control input-sm" id="id_additional_information" name="additional_information" placeholder="{% trans 'Add cover letter or anything else you want to share' %}"></textarea>
+                        <div class="checkbox" style="border-top: solid 1px #efefee; margin-top: 20px; padding: 15px 0">
+                            <label>
+                                <input type="checkbox" id="id_allowed_notifications" name="allowed_notifications">{% blocktrans %}Yes, <strong>ikwen</strong> can contact me about future job opportunities {% endblocktrans %}
+                            </label>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-sm-6" style="margin: auto; float: none">
+                               <button class="btn btn-sm btn-deep-blue btn-block">{% trans 'Submit' %}</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </section>
+    {% endblock %}
+
+{% endblock %}

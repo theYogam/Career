@@ -1,0 +1,80 @@
+{% extends 'website/base.html' %}
+
+{% load i18n humanize static auth_tokens  %}
+{% block page_title %}
+    <title>{% blocktrans with company_name=config.company_name %}Careers at {{ company_name }}{% endblocktrans %} </title>
+{% endblock %}
+
+{% block page_content %}
+    <div class="home">
+        {% block banner %}
+            <section>
+                 <div id="banner-top">
+                    <div class="section-banner-top" style="background-image: url({% static 'careers/img/ikwen_dev_office.jpg' %});">
+                        <div class="section-banner-inner">
+                            <div class="col-md-6 col-sm-6 col-md-offset-3 col-sm-offset-3 text-center">
+                                <h1>{% trans 'Jobs' %}</h1>
+                                <p>{% trans 'Turn your multiple skills into a valuable innovative IT projects at ikwen' %}</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="clearfix"></div>
+            </section>
+        {% endblock %}
+        <div class="clearfix"></div>
+        {% if offer_list %}
+            <section class="offer-list">
+                <div class="container inner">
+                    {% block customize_body %}{% endblock %}
+                        <div class="headers hidden-xs">
+                            <div class="col-sm-7">{% trans 'JOB' %}</div>
+                            <div class="col-sm-4">{% trans 'DOMAIN' %}</div>
+                            <div class="col-sm-1">{% trans 'POSITIONS' %}</div>
+                            <div class="clearfix"></div>
+                        </div>
+                    {% for offer in offer_list %}
+                        <div class="offer">
+                            <a href="{% url 'careers:offer_detail' offer.slug %}" class="col-sm-7 h2">{{ offer.name }}</a>
+                            <p class="col-sm-4 h3">{{ offer.domain }}</p>
+                            <p class="col-sm-1 h3">{{ offer.position_count }}</p>
+                            <div class="clearfix"></div>
+                        </div>
+                        <div class="clearfix"></div>
+                    {% endfor %}
+                    <div class="clearfix"></div>
+                </div>
+                <div class="clearfix"></div>
+            </section>
+        {% endif %}
+        <div class="clearfix"></div>
+        <section>
+            <div class="container">
+                <h1 class="text-center title">{% trans '...speaking of jobs' %}</h1>
+                <div class="bottom-side text-center">
+                    <a class="col-sm-4" href="https://ikwen.com/about#section-values">
+                        <div class="image" style="background-image: url({% static 'careers/img/our-values1.jpg' %});"></div>
+                        <h2>{% trans 'Our values' %}</h2>
+                        <p class="text-muted">{% trans 'Get to know the philosophy that makes our determination' %}</p>
+    {#                    <p><span class="blurb-item--meta icon-arrow-right blurb-item--meta-content">{% trans 'READ MORE' %} </span></p>#}
+                        <p>{% trans 'READ MORE' %}<i class="fas fa-long-arrow-alt-right animated infinite slideInLeft"></i></p>
+                    </a>
+                    <a class="col-sm-4" href="{% url 'careers:show_domain_list' %}">
+                        <div class="image" style="background-image: url({% static 'careers/img/job-categories.jpg' %});"></div>
+                        <h2>{% trans 'Our job categories' %}</h2>
+                        <p class="text-muted">{% trans 'What are you passionate in ?' %}</p>
+    {#                    <p><span class="blurb-item--meta icon-arrow-right blurb-item--meta-content">{% trans 'READ MORE' %} </span></p>#}
+                        <p>{% trans 'READ MORE' %}<i class="fas fa-long-arrow-alt-right animated infinite slideInLeft"></i></p>
+                    </a>
+                    <a class="col-sm-4" href="{% url 'careers:show_location_list' %}">
+                        <div class="image" style="background: url({% static 'careers/img/our-locations.png' %});"></div>
+                        <h2>{% trans 'Locations' %}</h2>
+                        <p class="text-muted">{% trans 'Find out how global we are' %}</p>
+    {#                    <p><span class="blurb-item--meta icon-arrow-right blurb-item--meta-content">{% trans 'READ MORE' %} </span></p>#}
+                        <p>{% trans 'READ MORE' %}<i class="fas fa-long-arrow-alt-right animated infinite slideInLeft"></i></p>
+                    </a>
+                </div>
+            </div>
+        </section>
+    </div>
+{% endblock %}

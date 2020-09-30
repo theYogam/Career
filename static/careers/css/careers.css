@@ -1,0 +1,249 @@
+body {background-color: #fff}
+.home section:last-of-type {background-color: #eaeaeaa8}
+section:last-of-type h1.title {font-weight: 900; font-size: 70px; color: #191414; margin: 50px 0}
+section:last-of-type a {display: block; text-decoration: none}
+.home section:last-of-type .image { background-size: cover; background-position: center center; width: 230px; height: 230px; border-radius: 100%; margin: auto;}
+/*section:last-of-type .image img { background-size: cover; background-position: center center; border-radius: 100%; width: auto; height: auto; will-change: transform;*/
+    /*border-radius: 100%;*/
+/*    transition: transform 0.2s ease 0s, -webkit-transform 0.2s ease 0s;*/
+/*}*/
+section:last-of-type a h2 {color: #191414; font-weight: 800}
+section:last-of-type a:hover h2 {color: #f28d40}
+section:last-of-type a p:nth-last-child(2) {height: 40px; overflow: hidden}
+section:last-of-type a p:last-of-type {color: #f28d40}
+#banner-top {margin-top: 70px; height: 600px; width: 100%; color: #fff; font-family: 'Nanum Myeongjo', serif;}
+.section-banner-inner {
+    width: inherit;
+    height: inherit;
+    /*background: rgb(2,0,36);*/
+    /*background: linear-gradient(90deg, rgba(2,0,36,0.7792637074360994) 0%,*/
+    /*rgba(9,9,121,0.49635054216999297) 35%, rgba(0,212,255,0.31707883348651966) 100%);*/
+    /*background: linear-gradient(90deg, rgb(89 89 96 / 78%) 0%, rgb(42 40 48) 0%, rgb(58 0 224 / 33%) 100%);*/
+    /*background: linear-gradient(90deg, rgb(99 99 115 / 36%) 0%, rgb(48 46 40 / 63%) 0%, rgb(0 69 224 / 82%) 100%);*/
+    background: linear-gradient(90deg, rgb(6 6 32 / 38%) 0%, rgb(0 0 0 / 65%) 0%, rgb(53 47 53 / 62%) 100%);
+}
+.section-banner-inner :first-child {padding-top: 3vh}
+.section-banner-inner h1 {font-weight: 900; font-size: 10.25em; margin-top: 100px;}
+.section-banner-inner p {font-size: 30px}
+.section-banner-top {margin-top: 0!important; background-size: cover; background-position: center; height: inherit}
+.headers {margin-bottom: 50px}
+.offer-list {background-color: #fff}
+.offer-list .inner {padding-top: 100px; padding-bottom: 100px; min-height: 700px}
+.offer {border-bottom: 1px solid #efefee; height: 140px}
+.offer * {margin: 20px 0}
+.offer .h2 {font-weight: 700;  text-decoration: none; color: #191414}
+.offer .h2:active, .offer .h2:hover {color: #f28d40}
+.offer p:first-of-type {color: #263b82;}
+.offer p:last-of-type {color: #f28d40}
+
+.bottom-side a i {visibility: hidden;  margin-left: 10px}
+.bottom-side a:hover i {visibility: visible;}
+
+.domain-list, .location-list {padding-top:100px; min-height: 650px; background: none}
+.location-list {padding-top: 0}
+.domain-list .domain p, .location-list .location p {font-size: 18px}
+.domain-list .domain, .location-list .location {display: block}
+.domain-list .domain .image, .location-list .location:not(banner) .image {background-size: cover; background-position: center center; height: 300px; width: 300px; border-radius: 50%}
+.location-list .location.banner {background-size: cover; background-position: center center; height: 550px; padding: 0}
+.location-list .location.banner h2 {padding-top: 50%; color: #fff}
+.location-list .location.banner p {color: #fff}
+.location-list .location.banner .image {display: none}
+.location-list .location .location-inner {display: flow-root; position: relative; height: inherit; background:rgba(0, 0, 0, .3)}
+.location-list .location:hover .location-inner {background: rgba(0, 0, 0, .8)}
+
+@media (max-width: 767px) {
+    .section-banner-inner h1 {font-size: 5.25em; margin-top: 40px;}
+    .section-banner-inner p {font-size: 15px}
+    #banner-top {margin-top: 40px; height: 250px;}
+    section:last-of-type h1.title {font-size: 30px;}
+    .offer .h2 {font-size: 24px}
+    .offer .h3 {font-size: 19px}
+    .offer a, .offer p {padding: 10px 0}
+    .offer * {margin: 2px}
+    .offer {margin: 10px 0}
+    .offer-list .inner {padding-top: 50px; padding-bottom: 10px; }
+    section:last-of-type a {margin-bottom: 70px}
+    section:last-of-type a p:nth-last-child(2) {height: auto}
+	.domain-list .domain .image, .location-list .location:not(banner) .image {height: 200px; width: 200px;}
+}
+
+@media (max-width: 1024px) and (min-width: 768px) {
+    section:last-of-type .image { width: 200px; height: 200px; margin: auto}
+}
+
+/* Animation set */
+.animated {
+	-webkit-animation-duration: 0.5s;
+	animation-duration: 0.5s;
+	-webkit-animation-fill-mode: both;
+	animation-fill-mode: both;
+}
+
+/*
+.animated.infinite {
+	-webkit-animation-iteration-count: infinite;
+	animation-iteration-count: infinite;
+}
+*/
+
+@-webkit-keyframes slideInLeft {
+  from {
+    -webkit-transform: translate3d(0, 0, 0);
+    transform: translate3d(0, 0, 0);
+    visibility: visible;
+  }
+
+  to {
+    -webkit-transform: translate3d(50%, 0, 0);
+    transform: translate3d(50%, 0, 0);
+  }
+}
+
+@-moz-keyframes slideInLeft {
+  from {
+    -webkit-transform: translate3d(0, 0, 0);
+    transform: translate3d(0, 0, 0);
+    visibility: visible;
+  }
+
+  to {
+    -webkit-transform: translate3d(50%, 0, 0);
+    transform: translate3d(50%, 0, 0);
+  }
+}
+
+@-o-keyframes slideInLeft {
+  from {
+    -webkit-transform: translate3d(0, 0, 0);
+    transform: translate3d(0, 0, 0);
+    visibility: visible;
+  }
+
+  to {
+    -webkit-transform: translate3d(50%, 0, 0);
+    transform: translate3d(50%, 0, 0);
+  }
+}
+
+@-ms-keyframes slideInLeft {
+  from {
+    -webkit-transform: translate3d(0, 0, 0);
+    transform: translate3d(0, 0, 0);
+    visibility: visible;
+  }
+
+  to {
+    -webkit-transform: translate3d(50%, 0, 0);
+    transform: translate3d(50%, 0, 0);
+  }
+}
+
+
+@keyframes slideInLeft {
+  from {
+    -webkit-transform: translate3d(0, 0, 0);
+    transform: translate3d(0, 0, 0);
+    visibility: visible;
+  }
+
+  to {
+    -webkit-transform: translate3d(50%, 0, 0);
+    transform: translate3d(50%, 0, 0);
+  }
+}
+
+.discover-link:hover > i {
+  -webkit-animation-name: slideInLeft;
+  animation-name: slideInLeft;
+}
+
+
+@-webkit-keyframes pulse {
+	from {
+	-webkit-transform: scale3d(1, 1, 1);
+	transform: scale3d(1, 1, 1);
+	}
+
+	50% {
+	-webkit-transform: scale3d(1.05, 1.05, 1.05);
+	transform: scale3d(1.05, 1.05, 1.05);
+	}
+
+	to {
+	-webkit-transform: scale3d(1, 1, 1);
+	transform: scale3d(1, 1, 1);
+	}
+}
+
+@-moz-keyframes pulse {
+	from {
+	-webkit-transform: scale3d(1, 1, 1);
+	transform: scale3d(1, 1, 1);
+	}
+
+	50% {
+	-webkit-transform: scale3d(1.05, 1.05, 1.05);
+	transform: scale3d(1.05, 1.05, 1.05);
+	}
+
+	to {
+	-webkit-transform: scale3d(1, 1, 1);
+	transform: scale3d(1, 1, 1);
+	}
+}
+
+@-o-keyframes pulse {
+	from {
+	-webkit-transform: scale3d(1, 1, 1);
+	transform: scale3d(1, 1, 1);
+	}
+
+	50% {
+	-webkit-transform: scale3d(1.05, 1.05, 1.05);
+	transform: scale3d(1.05, 1.05, 1.05);
+	}
+
+	to {
+	-webkit-transform: scale3d(1, 1, 1);
+	transform: scale3d(1, 1, 1);
+	}
+}
+
+@-ms-keyframes pulse {
+	from {
+	-webkit-transform: scale3d(1, 1, 1);
+	transform: scale3d(1, 1, 1);
+	}
+
+	50% {
+	-webkit-transform: scale3d(1.05, 1.05, 1.05);
+	transform: scale3d(1.05, 1.05, 1.05);
+	}
+
+	to {
+	-webkit-transform: scale3d(1, 1, 1);
+	transform: scale3d(1, 1, 1);
+	}
+}
+
+@keyframes pulse {
+	from {
+	-webkit-transform: scale3d(1, 1, 1);
+	transform: scale3d(1, 1, 1);
+	}
+
+	50% {
+	-webkit-transform: scale3d(1.05, 1.05, 1.05);
+	transform: scale3d(1.05, 1.05, 1.05);
+	}
+
+	to {
+	-webkit-transform: scale3d(1, 1, 1);
+	transform: scale3d(1, 1, 1);
+	}
+}
+
+.pulse:hover {
+	-webkit-animation-name: pulse;
+	animation-name: pulse;
+}

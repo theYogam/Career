@@ -1,0 +1,35 @@
+{% extends 'core/change_object_base.html' %}
+{% load i18n %}
+
+{% block js %}
+    {{ block.super }}
+    <script src="//cdn.tinymce.com/4/tinymce.min.js"></script>
+    <script>
+        (function () {
+            var properties = {
+                menubar: false,
+                statusbar: false,
+                plugins: [
+                    'advlist autolink lists link image charmap print preview anchor',
+                    'searchreplace visualblocks code fullscreen',
+                    'insertdatetime media table contextmenu paste code'
+                ],
+                paste_data_images: true,
+                content_css: [
+                    '//fonts.googleapis.com/css?family=Lato:300,300i,400,400i',
+                    '//www.tinymce.com/css/codepen.min.css'
+                ]
+            };
+            var detailProperties = JSON.parse(JSON.stringify(properties));
+
+            detailProperties['selector'] = '#id_description';
+            detailProperties['height'] = 300;
+            detailProperties['toolbar'] = 'undo redo | insert | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | table link image media code';
+            detailProperties['insert_button_items'] = 'charmap anchor insertdatetime';
+            if ($(window).width() >= 768) {
+                detailProperties['width'] = 740
+            }
+            tinymce.init(detailProperties);
+        })()
+    </script>
+{% endblock %}
