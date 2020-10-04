@@ -175,12 +175,12 @@ class OfferSubmission(ChangeObjectBase):
         return context
 
     def after_save(self, request, obj, *args, **kwargs):
+        weblet = get_service_instance()
         offer_slug = kwargs.get('offer_slug')
         for member in Member.objects.filter(is_staff=True):
             subject = _("New application submitted")
-            cta_url = reverse('careers:application_list')
+            cta_url = weblet.url + reverse('careers:application_list')
             applicant = obj.member
-            weblet = get_service_instance()
             try:
                 html_content = get_mail_content(subject, template_name='careers/mails/application_submitted.html',
                                                 extra_context={'first_name': applicant.full_name,

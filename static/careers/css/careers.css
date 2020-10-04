@@ -43,7 +43,7 @@ section:last-of-type a p:last-of-type {color: #f28d40}
 .location-list {padding-top: 0}
 .domain-list .domain p, .location-list .location p {font-size: 18px}
 .domain-list .domain, .location-list .location {display: block}
-.domain-list .domain .image, .location-list .location:not(banner) .image {background-size: cover; background-position: center center; height: 300px; width: 300px; border-radius: 50%}
+.domain-list .domain .image, .location-list .location:not(banner) .image {background-size: cover; background-position: center center; height: 300px; width: 300px; border-radius: 50%;}
 .location-list .location.banner {background-size: cover; background-position: center center; height: 550px; padding: 0}
 .location-list .location.banner h2 {padding-top: 50%; color: #fff}
 .location-list .location.banner p {color: #fff}
@@ -63,8 +63,9 @@ section:last-of-type a p:last-of-type {color: #f28d40}
     .offer {margin: 10px 0}
     .offer-list .inner {padding-top: 50px; padding-bottom: 10px; }
     section:last-of-type a {margin-bottom: 70px}
+    section:last-of-type a.location.banner {margin-bottom: 0!important;}
     section:last-of-type a p:nth-last-child(2) {height: auto}
-	.domain-list .domain .image, .location-list .location:not(banner) .image {height: 200px; width: 200px;}
+	.domain-list .domain .image, .location-list .location:not(banner) .image {height: 200px; width: 200px; margin: auto}
 }
 
 @media (max-width: 1024px) and (min-width: 768px) {
