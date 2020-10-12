@@ -1,5 +1,6 @@
 from django.db import models
 from django.db.models import Model
+
 from django.template.defaultfilters import slugify
 from django.utils.translation import gettext as _, get_language
 # from django.contrib.gis.utils import GeoIP
@@ -67,7 +68,7 @@ class Offer(Model):
 
 class Application(Model):
     upload_to = 'careers/Applications'
-    member = models.ForeignKey(Member)
+    member = models.ForeignKey(Member, null=True)
     offer = models.ForeignKey(Offer, help_text=_('Position to which you apply'))
     allowed_notifications = models.BooleanField(help_text=_('Does applicant which '
                                                            'to be notified for future job opportunities'),

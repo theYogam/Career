@@ -1,8 +1,14 @@
 {% extends 'careers/home.html' %}
 
 {% load i18n humanize static auth_tokens %}
+
+{% block meta %}
+    {{ block.super }}
+    <meta property="og:title" content="{% trans 'Domains' %} - Careers at ikwen" />
+{% endblock %}
+
 {% block page_title %}
-    <title>Domains - Careers at {{ config.company_name }} </title>
+    <title>Domains - Careers at ikwen </title>
 {% endblock %}
 
 

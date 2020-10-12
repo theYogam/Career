@@ -15,16 +15,16 @@
     <meta name="description" content="{% trans "Turn your multiple skills into a valuable innovative IT projects by submitting your resume" %}"/>
 
     <meta property="og:title" content="Careers at ikwen - {% trans "Contribute to the hatching of Africa's ace of the technological revolution" %}" />
-    <meta property="og:image" content="{% static 'careers/img/careers-logo.jpg' %}" />
+    <meta property="og:image" content="{% static 'careers/img/meta-careers-logo.jpg' %}" />
     <meta property="og:description" content="{% trans "Turn your multiple skills into a valuable innovative IT projects by submitting your resume" %}" />
-    <meta name="og:image" content="{% static 'careers/img/careers-logo.jpg' %}">
-    <link rel="manifest" href="{% static 'careers/img/careers-logo.jpg' %}">
+    <link rel="manifest" href="{% static 'careers/img/ikwen_logo_symbol_200x200.png' %}">
 {% endblock %}
 
 {% block head_style %}
     {{ block.super }}
     <link href="https://fonts.googleapis.com/css2?family=Nanum+Myeongjo&display=swap" rel="stylesheet">
-    <link href="{% static 'careers/css/careers.css' %}?v=06.10.20-17.20/" rel="stylesheet">
+    <link href="{% static 'careers/css/careers.css' %}?v=08.10.20-14.3
+    2/" rel="stylesheet">
     <link rel='stylesheet' href="https://cdnjs.cloudflare.com/ajax/libs/flag-icon-css/3.5.0/css/flag-icon.min.css" />
     <link rel='stylesheet' href="{% static 'website/css/bootstrap-select.min.css' %}" />
     <link rel='stylesheet' href="{% static 'website/css/website.css' %}?V=20.07.27.16.38" />
@@ -69,7 +69,7 @@
                         </div>
                         {% block header_brand %}
                             <a class="navbar-brand hidden-xs" href="{{ service.url }}">
-                                <img src="{% static "careers/img/careers-logo.jpg" %}" alt="ikwen-logo" style="height: 46px; ">
+                                <img src="{% static "careers/img/logo.png" %}" alt="ikwen-logo">
                             </a>
                             <strong class="navbar-brand visible-xs">{{ service.project_name }}</strong>
                         {% endblock %}
@@ -170,8 +170,8 @@
                                 <li class="dropdown daraja visible-md visible-lg">
                                   <a href="#" class="dropdown-toggle" data-toggle="dropdown">Daraja <b class="caret"></b> </a>
                                   <ul class="dropdown-menu" style="background: transparent">
-                                    <li><a href="{% url 'daraja:home' %}">{% trans "Community" %}</a></li>
-                                    <li><a href="{% url 'daraja:for_businesses' %}">{% trans "Enterprise" %}</a></li>
+                                    <li><a href="https://ikwen.com{% url 'daraja:home' %}">{% trans "Community" %}</a></li>
+                                    <li><a href="https://ikwen.com{% url 'daraja:for_businesses' %}">{% trans "Enterprise" %}</a></li>
                                   </ul>
                                 </li>
 {#                                <li class="daraja visible-md visible-lg"><a href="{% url 'daraja:home' %}"> Daraja</a></li>#}
@@ -179,20 +179,20 @@
                                 <li class="dropdown foulassi visible-md visible-lg">
                                   <a href="#" class="dropdown-toggle" data-toggle="dropdown">Foulassi <b class="caret"></b> </a>
                                   <ul class="dropdown-menu" style="background: transparent">
-                                    <li><a href="{% url 'foulassi:home' %}">{% trans "Parent" %}</a></li>
-                                    <li><a href="{% url 'foulassi:home_saas' %}">{% trans "School" %}</a></li>
+                                    <li><a href="https://ikwen.com{% url 'foulassi:home' %}">{% trans "Parent" %}</a></li>
+                                    <li><a href="https://ikwen.com{% url 'foulassi:home_saas' %}">{% trans "School" %}</a></li>
                                   </ul>
                                 </li>
 {#                                <li class="foulassi visible-md visible-lg"><a href="{% url 'foulassi:home' %}"> Foulassi</a></li>#}
-                                <li class="kakocase visible-lg"><a href="{% url 'kakocase' %}"> Kakocase</a></li>
-                                <li class="pinsview visible-lg"><a href="{% url 'pinsview' %}"> PinsView</a></li>
+                                <li class="kakocase visible-lg"><a href="https://ikwen.com{% url 'kakocase' %}"> Kakocase</a></li>
+                                <li class="pinsview visible-lg"><a href="https://ikwen.com{% url 'pinsview' %}"> PinsView</a></li>
                                 <li id="ik-apps" class="visible-md dropdown">
                                     <a data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                         <i class="fas fa-th"></i>
                                     </a>
                                     <ul class="dropdown-menu" aria-labelledby="ik-apps">
-                                        <li class="kakocase"><a href="{% url 'kakocase' %}"> Kakocase</a></li>
-                                        <li class="pinsview"><a href="{% url 'pinsview' %}"> PinsView</a></li>
+                                        <li class="kakocase"><a href="https://ikwen.com{% url 'kakocase' %}"> Kakocase</a></li>
+                                        <li class="pinsview"><a href="https://ikwen.com{% url 'pinsview' %}"> PinsView</a></li>
                                     </ul>
                                 </li>
                                 <li id="ik-apps" class="visible-sm dropdown">
@@ -200,11 +200,11 @@
                                         <i class="fas fa-th"></i>
                                     </a>
                                     <ul class="dropdown-menu" aria-labelledby="ik-apps">
-                                        <li class="daraja"><a href="{% url 'daraja:home' %}"> Daraja</a></li>
+                                        <li class="daraja"><a href="https://ikwen.com{% url 'daraja:home' %}"> Daraja</a></li>
                                         <li class="tsunami"><a href="https://www.ikwen.com/tsunami/"> Tsunami</a></li>
-                                        <li class="foulassi"><a href="{% url 'foulassi:home' %}"> Foulassi</a></li>
-                                        <li class="kakocase"><a href="{% url 'kakocase' %}"> Kakocase </a></li>
-                                        <li class="pinsview"><a href="{% url 'pinsview' %}"> PinsView</a></li>
+                                        <li class="foulassi"><a href="https://ikwen.com{% url 'foulassi:home' %}"> Foulassi</a></li>
+                                        <li class="kakocase"><a href="https://ikwen.com{% url 'kakocase' %}"> Kakocase </a></li>
+                                        <li class="pinsview"><a href="https://ikwen.com{% url 'pinsview' %}"> PinsView</a></li>
                                     </ul>
                                 </li>
                                 {% if user.is_authenticated %}

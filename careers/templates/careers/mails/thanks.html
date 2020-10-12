@@ -139,7 +139,7 @@ table.center-on-narrow {
         <!-- Visually Hidden Preheader Text : BEGIN -->
         <div style="-ms-text-size-adjust:100%;-webkit-text-size-adjust:100%;display:none;font-size:1px;line-height:1px;max-height:0px;max-width:0px;opacity:0;overflow:hidden;mso-hide:all;font-family:'Myriad Pro','Lucida Sans Unicode' ,Verdana, Helvetica, Arial, sans-serif;" >
             {% blocktrans with offer_name=offer.name %}
-                {{ first_name }} submitted his application for <strong>{{ offer_name }}</strong>.
+                Thanks for submitting your application for <strong>{{ offer_name }}</strong>.
             {% endblocktrans%}
         </div>
         <!-- Visually Hidden Preheader Text : END -->
@@ -173,8 +173,8 @@ table.center-on-narrow {
             <!-- Hero Image, Flush : BEGIN -->
             <tr>
               <td class="full-width-image" align="center" style="padding:15px">
-                  <div style="border: 1px solid #eee; border-radius: 92px; height: 180px; padding: 3px; overflow: hidden; width: 180px">
-                      <div style="background: url({% if payer.photo.name %}{{ IKWEN_MEDIA_URL }}{{ payer.photo.small_name }}{% else %} 'https://static.ikwen.com/daraja/img/login-avatar.jpg'{% endif %}) no-repeat center; background-size: cover; height: 180px; width: 180px"></div>
+                  <div style="height: 200px; padding: 3px; overflow: hidden; width: 300px">
+                      <div style="background: url('https://static.ikwen.com/careers/img/Partnership.jpg') no-repeat center; background-size: cover; width: 300px; height: inherit"></div>
                   </div>
                 </td>
             </tr>
@@ -199,9 +199,12 @@ table.center-on-narrow {
                       <td valign="middle" style="mso-height-rule: exactly; line-height: 25px;"><!-- color: #555555; -->
                          <div style="padding: 15px;">
                               <p style="-ms-text-size-adjust:100%;-webkit-text-size-adjust:100%;color:#555;text-align:justify" >
-                                {% blocktrans with offer_name=offer.name %}
-                                  Dear {{ admin_name }},
-                                    <br style="-ms-text-size-adjust:100%;-webkit-text-size-adjust:100%;" ><strong>{{ first_name }}</strong> just submits his application for a position as <strong>{{ offer_name }}</strong>.<br style="-ms-text-size-adjust:100%;-webkit-text-size-adjust:100%;" > Go to the back office and download his resume.
+                                {% blocktrans %}
+                                  Dear {{ applicant_name }},
+                                    <br style="-ms-text-size-adjust:100%;-webkit-text-size-adjust:100%;" >Thanks for taking time to apply for our position. We appreciated your interest in <strong>IKWEN</strong>.<br style="-ms-text-size-adjust:100%;-webkit-text-size-adjust:100%;" > We're currently in the process of taking applications for this position. If you are selected to continue into our process of interview, we will contact you further to inform you the date when it will take place.
+                                    <br style="-ms-text-size-adjust:100%;-webkit-text-size-adjust:100%;" >Now, you can visit our main services by clicking on the button below.
+                                    <br style="-ms-text-size-adjust:100%;-webkit-text-size-adjust:100%;" ><br style="-ms-text-size-adjust:100%;-webkit-text-size-adjust:100%;" >
+                                    <span style="color: red">NB: The knowledge of our services has an advantage during the interview</span>
                                 {% endblocktrans %}</p><br style="-ms-text-size-adjust:100%;-webkit-text-size-adjust:100%;" >
                          </div>
                           <!-- Button : Begin -->
@@ -209,7 +212,7 @@ table.center-on-narrow {
                                 <tr>
                                     <td style="border-radius: 3px; text-align: center;" class="button-td">
                                         <a target="_blank" href="{{ cta_url }}" style="background: #f38e42; border: 15px solid #f38e42	; padding: 0 10px;color: #ffffff;font-size: 13px; line-height: 1.1; text-align: center; text-decoration: none; display: block; border-radius: 3px;" class="button-a">
-                                      <!--[if mso]>&nbsp;&nbsp;&nbsp;&nbsp;<![endif]-->{% blocktrans %}Download resume{% endblocktrans %}<!--[if mso]>&nbsp;&nbsp;&nbsp;&nbsp;<![endif]-->
+                                      <!--[if mso]>&nbsp;&nbsp;&nbsp;&nbsp;<![endif]-->{% blocktrans %}Visit our platform{% endblocktrans %}<!--[if mso]>&nbsp;&nbsp;&nbsp;&nbsp;<![endif]-->
                                       </a>
                                     </td>
                                 </tr>

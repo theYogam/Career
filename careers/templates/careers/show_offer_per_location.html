@@ -2,6 +2,12 @@
 
 {% load i18n humanize static auth_tokens  %}
 
+{% block meta %}
+    {{ block.super }}
+    <meta property="og:title" content="{% blocktrans with town=location.town company_name=config.company_name %}
+        {{ town }} - Careers at ikwen {% endblocktrans %}" />
+{% endblock %}
+
 {% block head_style %}
     {{ block.super }}
     <style>
@@ -14,7 +20,7 @@
 
 {% block page_title %}
     <title>{% blocktrans with town=location.town company_name=config.company_name %}
-        {{ town }} - Careers at {{ company_name }}{% endblocktrans %} </title>
+        {{ town }} - Careers at ikwen {% endblocktrans %} </title>
 {% endblock %}
 
 {% block banner %}

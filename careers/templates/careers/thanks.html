@@ -1,9 +1,15 @@
 {% extends 'careers/offer_submission.html' %}
 {% load i18n humanize static auth_tokens  %}
 
+{% block meta %}
+    {{ block.super }}
+    <meta property="og:title" content="{% blocktrans with company_name=config.company_name %}
+        Thanks for submission - Careers at ikwen{% endblocktrans %}" />
+{% endblock %}
+
 {% block page_title %}
-    <title>{% blocktrans with offer_name=offer.name company_name=config.company_name %}
-        {{ offer_name }} - Careers at {{ company_name }} {% endblocktrans %}</title>
+    <title>{% blocktrans with company_name=config.company_name %}
+        Thanks for submission - Careers at ikwen {% endblocktrans %}</title>
 {% endblock %}
 
 {% block head_style %}

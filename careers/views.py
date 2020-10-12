@@ -60,6 +60,10 @@ class ShowOfferList(TemplateView):
     def get_context_data(self, **kwargs):
         context = super(ShowOfferList, self).get_context_data(**kwargs)
         context['offer_list'] = list(Offer.objects.all())
+        service = get_service_instance()
+        context['service'] = service
+        context['config'] = service.config
+        context['user'] = self.request.user
         return context
 
 
@@ -88,6 +92,10 @@ class ShowLocationList(TemplateView):
             location.offer_count = offer_count
             location_list.append(location)
         context['location_list'] = location_list
+        service = get_service_instance()
+        context['service'] = service
+        context['config'] = service.config
+        context['user'] = self.request.user
         return context
 
 
@@ -100,6 +108,10 @@ class ShowDomainList(TemplateView):
         for domain in domain_list:
             domain.available_offer_count = Offer.objects.filter(domain=domain).count()
         context['domain_list'] = domain_list
+        service = get_service_instance()
+        context['service'] = service
+        context['config'] = service.config
+        context['user'] = self.request.user
         return context
 
 
@@ -128,6 +140,10 @@ class ShowOfferPerDomain(TemplateView):
         location_list = [offer.location for offer in Offer.objects.filter(domain=domain)]
         context['location_count'] = len(set(location_list))
         context['domain'] = domain
+        service = get_service_instance()
+        context['service'] = service
+        context['config'] = service.config
+        context['user'] = self.request.user
         return context
 
 
@@ -163,44 +179,48 @@ class OfferSubmission(ChangeObjectBase):
         offer = get_object_or_404(Offer, slug=offer_slug)
         try:
             application = Application.objects.get(member=self.request.user, offer=offer)
+            return application
         except:
-            application = Application.objects.create(member=self.request.user, offer=offer)
-        return application
+            pass
 
     def get_context_data(self, **kwargs):
         context = super(OfferSubmission, self).get_context_data(**kwargs)
         offer_slug = kwargs.get('offer_slug')
         context['offer'] = get_object_or_404(Offer, slug=offer_slug)
         context['location_list'] = [location for location in Location.objects.all()]
+        service = get_service_instance()
+        context['service'] = service
+        context['config'] = service.config
+        context['user'] = self.request.user
         return context
 
     def after_save(self, request, obj, *args, **kwargs):
         weblet = get_service_instance()
         offer_slug = kwargs.get('offer_slug')
-        for member in Member.objects.filter(is_staff=True):
-            subject = _("New application submitted")
-            cta_url = weblet.url + reverse('careers:application_list')
-            applicant = obj.member
-            try:
-                html_content = get_mail_content(subject, template_name='careers/mails/application_submitted.html',
-                                                extra_context={'first_name': applicant.full_name,
-                                                               'admin_name': member.first_name,
-                                                               'offer': obj.offer,
-                                                               'location': obj.location,
-                                                               'cta_url': cta_url})
-                sender = '%s <no-reply@%s>' % (weblet.project_name, weblet.domain)
-                msg = EmailMessage(subject, html_content, sender, [member.email])
-                msg.cc = ["rsihon@gmail.com", "rmbogning@gmail.com", "wilfriedwillend@gmail.com"]
-                msg.content_subtype = "html"
-                if getattr(settings, 'UNIT_TESTING', False):
-                    msg.send()
-                else:
-                    Thread(target=lambda m: m.send(), args=(msg,)).start()
-            except:
-                logger.error("%s - Failed to send notice mail to %s." % (weblet, member.first_name), exc_info=True)
-            body = _('%(applicant_name)s submitted his application for a position as %(position)s' %
-                     {'applicant_name': member.full_name, 'position': obj.offer.name})
-            send_push(weblet, member, subject, body, cta_url)
+        obj.member = request.user
+        obj.save(using='default')
+        staff_emails = [member.email for member in Member.objects.using(UMBRELLA).filter(is_staff=True)]
+
+        subject = _("Thank you for your application")
+        cta_url = "https://ikwen.com"
+        applicant = obj.member
+        try:
+            html_content = get_mail_content(subject, template_name='careers/mails/thanks.html',
+                                            extra_context={'applicant_name': applicant.full_name,
+                                                           'offer': obj.offer,
+                                                           'cta_url': cta_url})
+            sender = 'Careers @ %s <no-reply@%s>' % (weblet.project_name, weblet.domain)
+            msg = EmailMessage(subject, html_content, sender, [applicant.email])
+            msg.bcc = staff_emails
+            msg.content_subtype = "html"
+            if getattr(settings, 'UNIT_TESTING', False):
+                msg.send()
+            else:
+                Thread(target=lambda m: m.send(), args=(msg,)).start()
+        except:
+            logger.error("%s - Failed to send notice mail to %s." % (weblet, applicant.first_name), exc_info=True)
+        body = _('Congratulation!!! We received your application for position as %(position)s' % {'position': obj.offer.name})
+        send_push(weblet, applicant, subject, body, cta_url)
         return HttpResponseRedirect(reverse('careers:thanks', args=(offer_slug,)))
 
 
@@ -218,6 +238,7 @@ class ChangeOffer(ChangeObjectBase):
 class ApplicationList(HybridListView):
     model = Application
     model_admin = ApplicationAdmin
+    list_filter = ('offer',)
 
 
 class ChangeApplication(ChangeObjectBase):
@@ -232,6 +253,10 @@ class Thanks(TemplateView):
         context = super(Thanks, self).get_context_data(**kwargs)
         offer_slug = kwargs.get('offer_slug')
         context['offer'] = get_object_or_404(Offer, slug=offer_slug)
+        service = get_service_instance()
+        context['service'] = service
+        context['config'] = service.config
+        context['user'] = self.request.user
         return context
 
 

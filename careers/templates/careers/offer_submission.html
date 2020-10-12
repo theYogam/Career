@@ -1,9 +1,14 @@
 {% extends 'website/base.html' %}
 {% load i18n humanize static auth_tokens  %}
 
+{% block meta %}
+    {{ block.super }}
+    <meta property="og:title" content="{% blocktrans with offer_name=offer.name company_name=config.company_name %}{{ offer_name }} - Careers at ikwen {% endblocktrans %}" />
+{% endblock %}
+
 {% block page_title %}
     <title>{% blocktrans with offer_name=offer.name company_name=config.company_name %}
-        {{ offer_name }} - Careers at {{ company_name }} {% endblocktrans %}</title>
+        {{ offer_name }} - Careers at ikwen {% endblocktrans %}</title>
 {% endblock %}
 
 {% block head_style %}
@@ -39,10 +44,11 @@
             {% if errors %}<p class="alert alert-danger">{{ errors }}</p>{% endif %}
             <div class="container">
                 <div class="col-sm-6" style="margin: auto; float: none">
-                    <form method="post">{% csrf_token %}
+                    <span class="warning warning-alerts resume-required tpl" style="color: red">{% trans 'Your resume is required...' %}</span>
+                    <form id="application" method="post">{% csrf_token %}
                         <h4>{% trans 'SUBMIT YOUR APPLICATION' %}</h4>
-                        <input type="hidden" name="member" value="{{ user.id }}">
                         <input type="hidden" name="offer" value="{{ offer.id }}">
+                        <input type="hidden" name="member" value="{{ user.id }}">
                         <input type="hidden" name="label_field" value="name">
                         <input type="hidden" name="slug_field" value="slug">
                         {% for media_obj in media_field_list %}
@@ -109,7 +115,7 @@
                             <input type="url" id="id_youtube_url" name="youtube_url" class="form-control input-sm">
                         </div>
                         <h4>{% trans 'ADDITIONAL INFORMATION' %}</h4>
-                        <textarea class="form-control input-sm" id="id_additional_information" name="additional_information" placeholder="{% trans 'Add cover letter or anything else you want to share' %}"></textarea>
+                        <textarea class="form-control input-sm" id="id_additional_information" name="additional_information" placeholder="{% trans 'Add cover letter or anything else you want to share' %}" style="height: 250px"></textarea>
                         <div class="checkbox" style="border-top: solid 1px #efefee; margin-top: 20px; padding: 15px 0">
                             <label>
                                 <input type="checkbox" id="id_allowed_notifications" name="allowed_notifications">{% blocktrans %}Yes, <strong>ikwen</strong> can contact me about future job opportunities {% endblocktrans %}
@@ -117,13 +123,28 @@
                         </div>
                         <div class="form-group">
                             <div class="col-sm-6" style="margin: auto; float: none">
-                               <button class="btn btn-sm btn-deep-blue btn-block">{% trans 'Submit' %}</button>
+                               <button class="btn btn-sm btn-deep-blue btn-block submit">{% trans 'Submit' %}</button>
                             </div>
                         </div>
+                        <span class="warning warning-alerts submission-failed tpl" style="color: red">{% trans 'Failed to submit your application ...' %}</span>
                     </form>
                 </div>
             </div>
         </section>
     {% endblock %}
 
+{% endblock %}
+
+{% block js %}
+    {{ block.super }}
+    <script>
+        (() => {
+          $('form#application').submit(() => {
+             if ($("[name='resume']").val() === '{% get_media_prefix %}'){
+                 $('.resume-required, .submission-failed').show();
+                 return false;
+             }
+          });
+        })()
+    </script>
 {% endblock %}
